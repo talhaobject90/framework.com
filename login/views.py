@@ -44,3 +44,5 @@ def index(request):
     'common/home.html',
     { 'user': request.user }
     )
+
+
