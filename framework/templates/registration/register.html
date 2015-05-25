@@ -1,0 +1,44 @@
+{% extends "common/header.html" %}
+{% block title %}{% endblock %}
+{% block head %}User Registration{% endblock %}
+{% block content %}
+    	<div class="row clearfix">
+	<br><br>
+		<div class="col-md-4 column">
+		
+		</div>
+		<div class="col-md-4 column">
+			<div class="jumbotron">
+				<h2>
+					<a href="/">Framework.com</a>
+				</h2>
+				</div>
+	      <form role="form" method="post" action=".">{% csrf_token %}
+    {% if form.errors %}
+     		<div class="alert alert-dismissable alert-danger">
+				 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		 User name or password is incorrect 
+			</div>
+    {% endif %}
+    		<div class="form-group">
+					 <label for="id_username">User Name</label>{{ form.username }}
+				</div>		
+    		<div class="form-group">
+					 <label for="id_email">Email address</label> {{ form.email }}
+				</div>
+				<div class="form-group">
+					 <label for="id_password1">Password</label>{{ form.password1 }}
+				</div>
+								<div class="form-group">
+					 <label for="id_password2">Password</label>{{ form.password2 }}
+				</div>
+				 
+				<div class="checkbox">
+				</div> <button type="submit" class="btn btn-default">Login</button>
+			</form>
+			  
+		</div>
+		<div class="col-md-4 column">
+		</div>
+	</div>
+{% endblock %}

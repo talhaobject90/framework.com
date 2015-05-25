@@ -36,9 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
- #   'mathfilters',
     'framework',
-    #'beachnbeach.templatetags.resort_location'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -46,6 +44,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -127,7 +126,7 @@ MEDIA_ROOT = '/var/www/media/'
 MEDIA_URL = '/media/'
 
 if not ON_PAAS: # local
-    
+     
     MEDIA_ROOT = '/var/www/media/'
     MEDIA_URL = '/media/'
     
@@ -140,7 +139,11 @@ if 'OPENSHIFT_DATA_DIR' in os.environ:
     MEDIA_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR'), 'media')
 else:
     MEDIA_ROOT = '/var/www/media/'
-
+    
+    
+    
+import django.contrib.auth
+django.contrib.auth.LOGIN_URL = '/dashboard'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
   "django.core.context_processors.request",
@@ -163,6 +166,5 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates'),
 )
 
-ADMINS = (('Talha', 'talha@object90.com'),)
-
+ 
  
