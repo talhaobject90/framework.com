@@ -1,0 +1,174 @@
+{% extends "common/header.html" %}
+{% block title %}{% endblock %}
+{% block head %}User Registration{% endblock %}
+{% block content %}
+ 
+	<div class="row clearfix">
+<br><br>	
+		<div class="col-md-12 column">
+			<div class="tabbable" id="tabs-698628">
+			<!-- MAIN TABS -->
+				<ul class="nav nav-tabs">
+					<li>
+						<a href="/project-info"  >Project Information</a>
+					</li>
+					<li   class="active" >
+						<a href="/introduction">Requirements</a>
+					</li>
+					<li>
+						<a href="/use-case" >Usecase Information</a>
+					</li>
+					<li>
+						<a href="/io-config"  >Input & Output Configuration</a>
+					</li>
+					<li>
+						 <button type="button" class="btn btn-default">Generate</button>
+					</li>
+				</ul>
+				<!--  END OF MAIN TABS -->
+				
+				<!--  MAIN TABS CONTENT -->
+				<div class="tab-content">
+					<div class="tab-pane  " id="panel_project_info">
+						<p>
+							<div class="col-md-12 column">
+					<form role="form" class="form-inline">
+						<div class="form-group">
+							 <label for="input_project_info">Project Information</label><input type="text" class="form-control" id="input_project_info" />
+						</div>
+						<div class="form-group">
+							 <label for="input_project_code">Project Code</label><input type="text" class="form-control" id="input_project_code" />
+						</div>
+						<div class="form-group">
+							 <label for="input_prog_lang">Programming Language</label>
+							 <select class="form-control" >
+							 <option>VB</option>
+							 <option>Django</option>
+							 </select>
+						</div>
+						<div class="form-group">
+							 <label for="input_database">Database</label>
+							 <select class="form-control" >
+							 <option>VB</option>
+							 <option>Django</option>
+							 </select>
+						</div>
+						<br>
+						<div class="form-group">
+							 <label for="input_process_model">Process model</label>
+							 <select class="form-control" >
+							 <option>VB</option>
+							 <option>Django</option>
+							 </select>
+						</div>
+						<div class="form-group">
+							 <label for="input_architecture">Architecture</label>
+							 <select class="form-control" >
+							 <option>VB</option>
+							 <option>Django</option>
+							 </select>
+						</div>
+						<div class="form-group">
+							 <label for="input_cust_name">Customer Name</label><input type="text" class="form-control" id="input_cust_name" />
+						</div>
+						<div class="form-group">
+							 <label for="input_cust_code">Customer Code</label><input type="text" class="form-control" id="input_cust_code" />
+						</div>
+						<br>
+						<div class="form-group">
+							 <label for="input_cust_addr">Customer Address</label>
+							 <textarea rows="10" cols="20" class="form-control" id="input_cust_addr" />
+							 </textarea>
+						</div>
+						
+					</form>
+				</div>
+						</p>
+					</div>
+					
+					<div class="tab-pane active" id="panel_requirements">
+						<p>
+						
+						<!--  REQUIREMENTS TAB -->
+						
+						
+						
+						<div class="col-md-12 column">
+			<nav class="navbar navbar-default" role="navigation">
+	 
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<ul class="nav navbar-nav">
+						<li >
+							<a href="/introduction">Introduction</a>
+						</li>
+						<li>
+							<a href="/background ">Background</a>
+						</li>
+							<li >
+							<a href="/prod-info ">Product Information</a>
+						</li>
+						<li>
+							<a href="/features">Features</a>
+						</li>
+						<li >
+							<a href="/non-func-1">Non Functional - 1</a>
+						</li>
+						<li>
+							<a href="/non-func-2">Non Functional - 2</a>
+						</li>
+						<li >
+							<a href="/non-func-3">Non Functional - 3</a>
+						</li>
+						<li>
+							<a href="/environment">Environment</a>
+						</li>
+						<li >
+							<a href="/add-dev-cons">Additional Dev Considerations</a>
+						</li>
+						<li   class="active">
+							<a href="/post-dev">Post Development</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		
+				<div class="col-md-12 column">
+						
+					<label for="input_tech_transfer_req">Technology Transfer Requirements</label>
+					<textarea rows="3" cols="100%" class="form-control" id="input_tech_transfer_req" ></textarea>
+					
+					<label for="input_maintenance_req">Maintenance Requirements</label>
+					<textarea rows="3" cols="100%" class="form-control" id="input_maintenance_req" ></textarea>
+					
+				</div>
+		
+		
+ 
+				<!--  END OF REQUIREMENTS TAB -->
+						</p>
+					</div>
+					<div class="tab-pane " id="panel_usecase_info">
+						<p>
+							Howdy, I'm in Section 2.
+						</p>
+					</div>
+					<div class="tab-pane " id="panel_io_config">
+						<p>
+							Howdy, I'm in Section 2.
+						</p>
+					</div>
+				 
+				</div>
+				<!--  END OF MAIN TABS CONTENT -->
+				
+			</div>
+			
+			
+
+				
+				
+		</div>
+	</div>
+{% endblock %}

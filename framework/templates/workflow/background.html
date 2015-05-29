@@ -1,0 +1,143 @@
+{% extends "common/header.html" %}
+{% block title %}{% endblock %}
+{% block head %}User Registration{% endblock %}
+{% block content %}
+ 
+ 
+	<div class="row clearfix">
+<br><br>	
+		<div class="col-md-12 column">
+			<div class="tabbable" id="tabs-698628">
+			<!-- MAIN TABS -->
+				<ul class="nav nav-tabs">
+					<li >
+						<a href="/project-info"  >Project Information</a>
+					</li>
+					<li  class="active" >
+						<a href="/introduction">Requirements</a>
+					</li>
+					<li>
+						<a href="/use-case" >Usecase Information</a>
+					</li>
+					<li>
+						<a href="/io-config"  >Input & Output Configuration</a>
+					</li>
+					<li>
+						 <button type="button" class="btn btn-default">Generate</button>
+					</li>
+				</ul>
+				<!--  END OF MAIN TABS -->
+				
+				<!--  MAIN TABS CONTENT -->
+				<div class="tab-content">
+ 
+					
+					<div class="tab-pane active" id="panel_requirements">
+						 
+						
+						<!--  REQUIREMENTS TAB -->
+						
+						
+						
+						<div class="col-md-12 column">
+			<nav class="navbar navbar-default" role="navigation">
+	 
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li >
+							<a href="/introduction">Introduction</a>
+						</li>
+						<li  class="active">
+							<a href="/background ">Background</a>
+						</li>
+							<li >
+							<a href="/prod-info ">Product Information</a>
+						</li>
+						<li>
+							<a href="/features">Features</a>
+						</li>
+						<li >
+							<a href="/non-func-1">Non Functional - 1</a>
+						</li>
+						<li>
+							<a href="/non-func-2">Non Functional - 2</a>
+						</li>
+						<li >
+							<a href="/non-func-3">Non Functional - 3</a>
+						</li>
+						<li>
+							<a href="/environment">Environment</a>
+						</li>
+						<li >
+							<a href="/add-dev-cons">Additional Dev Considerations</a>
+						</li>
+						<li   >
+							<a href="/post-dev">Post Development</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="col-md-12 column">
+		
+			<label for="input_the_problem_of">The problem of</label>
+			<input type="text" class="form-control" id="input_the_problem_of" />
+			
+			<label for="input_affects">Affects</label>
+			<input type="text" class="form-control" id="input_affects" />
+			
+			<label for="input_the_impact_of_which">The impact of which</label>
+			<input type="text" class="form-control" id="input_the_impact_of_which" />
+			
+			<label for="input_success_soln">A Successful solution would</label>
+			<input type="text" class="form-control" id="input_success_soln" />
+		
+			<label for="input_for">For</label>
+			<input type="text" class="form-control" id="input_for" />
+			
+			<label for="input_affects">Who</label>
+			<input type="text" class="form-control" id="input_who" />
+			
+			<label for="input_prod_sys_name">Product / System Name</label>
+			<input type="text" class="form-control" id="input_prod_sys_name" />
+			
+			<label for="input_that">That</label>
+			<input type="text" class="form-control" id="input_that" />
+
+			<label for="input_unlike">Unlike</label>
+			<input type="text" class="form-control" id="input_unlike" />
+			
+			<label for="input_our_product">Our Product</label>
+			<input type="text" class="form-control" id="input_our_product" />
+		
+		</div>
+		
+		
+ 
+				<!--  END OF REQUIREMENTS TAB -->
+						 
+					</div>
+					<div class="tab-pane " id="panel_usecase_info">
+						<p>
+							Howdy, I'm in Section 2.
+						</p>
+					</div>
+					<div class="tab-pane " id="panel_io_config">
+						<p>
+							Howdy, I'm in Section 2.
+						</p>
+					</div>
+				 
+				</div>
+				<!--  END OF MAIN TABS CONTENT -->
+				
+			</div>
+			
+			
+
+				
+				
+		</div>
+	</div>
+{% endblock %}
