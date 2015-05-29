@@ -143,7 +143,7 @@ else:
     
     
 import django.contrib.auth
-django.contrib.auth.LOGIN_URL = '/dashboard'
+django.contrib.auth.LOGIN_URL = '/project-info'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
   "django.core.context_processors.request",

@@ -27,9 +27,7 @@
   <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
   <link rel="shortcut icon" href="img/favicon.png">
   
-	<script type="text/javascript" src="{% static 'js/jquery.min.js'%}"></script>
-	<script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
-	<script type="text/javascript" src="{% static 'js/scripts.js'%}"></script>
+
 </head>
 
 <body {% block background_image_style %}  style="background-image: url({% static 'img/simple-gray-texture.jpg'%});" {% endblock %}>
@@ -37,5 +35,8 @@
 <div class="container">
 							{% block content %} {% endblock %}
 </div>
+	<script type="text/javascript" src="{% static 'js/jquery.min.js'%}"></script>
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+	<script type="text/javascript" src="{% static 'js/scripts.js'%}"></script>
 </body>
 </html>
