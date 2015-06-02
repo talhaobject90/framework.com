@@ -32,18 +32,15 @@
 				<div class="tab-content">
 					<div class="tab-pane  active" id="panel_project_info">
 						<p>
-						
-						
-
 							<div class="col-md-12 column">
-					<form role="form" class="form-inline"  action="." method="POST">{% csrf_token %}
+					<form " role="form" class="form-inline"  action="." method="POST">{% csrf_token %}
 					<label> File name : {{file_name}}</label>
 					<!-- - FORM MODAL -->
 					<div class="col-md-6 column">
 			 <a id="modal_trigger_href" style="display:none;" href="#modal-container-543351" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
 			
 			<div class="modal fade" id="modal-container-543351" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
+				<div class="modal-dialog" style="width:250px">
 					<div class="modal-content">
 						<div class="modal-header">
 							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -52,13 +49,13 @@
 							</h4>
 						</div>
 						<div class="modal-body">
-											<div class="form-group">
+							<div class="form-group">
 							 <label for="input_file_name">File name</label><input type="text" class="form-control"    value="{{json_data.file_name}}" name="file_name" id="input_file_name" />
 						</div>
 						</div>
 						<div class="modal-footer">
 							 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							  <button type="submit" class="btn btn-primary">Save changes</button>
+							  <input  id="submit_trigger_modal"   type="submit" class="btn btn-primary">
 						</div>
 					</div>
 					
@@ -69,7 +66,7 @@
 		</div>
 		
 		<!--  END OF  FORM MODAL -->
-					<input type="submit" class="form-control"  id="form_submit">
+					 <input type="submit" class="form-control"  id="form_submit"  style="visibility:hidden"> 
 						<div class="form-group">
 							 <label for="input_project_info">Project Information</label><input type="text" class="form-control"    value="{{json_data.project_info}}" name="project_info" id="input_project_info" />
 						</div>
@@ -78,7 +75,7 @@
 						</div>
 						<div class="form-group">
 							 <label for="input_prog_lang">Programming Language</label>
-							 <select class="form-control"  name="prog_lang" >
+							 <select class="form-control"  name="prog_lang" id="prog_lang" >
 							 <option    {% if  json_data.prog_lang == "php" %} selected   {% endif %} value="php" >PHP</option>
 							 <option   {% if  json_data.prog_lang == "python" %} selected   {% endif %} value="python">Python</option>
 							 <option   {% if  json_data.prog_lang == "ruby" %} selected   {% endif %} value="ruby">Ruby</option>	
@@ -104,9 +101,22 @@
 						</div>
 						<div class="form-group">
 							 <label for="input_architecture">Architecture</label>
-							 <select class="form-control"  name="architecture">
-							 <option  {% if  json_data.architecture == "arch_1" %} selected   {% endif %}  value="arch_1">Arch 1</option>
-							 <option  {% if  json_data.architecture == "arch_2" %} selected   {% endif %}  value="arch_2">Arch 2</option>
+							 <select class="form-control"  name="architecture" id="select_arch">
+							 {% if  json_data.prog_lang == "php" %}
+							 <option  {% if  json_data.architecture == "wordpress" %} selected   {% endif %}  value="wordpress">Wordpress</option>
+							 <option  {% if  json_data.architecture == "drupal" %} selected   {% endif %}  value="drupal">Drupal</option>
+							 <option  {% if  json_data.architecture == "opencart" %} selected   {% endif %}  value="opencart">Opencart</option>
+							 <option  {% if  json_data.architecture == "magento" %} selected   {% endif %}  value="magento">Magento</option>
+							 {% endif %}
+							 
+							 {% if  json_data.prog_lang == "python" %}
+							 <option  {% if  json_data.architecture == "fullstack" %} selected   {% endif %}  value="fullstack">Full Stack</option>
+							 <option  {% if  json_data.architecture == "django" %} selected   {% endif %}  value="django">Django</option>
+							 {% endif %}
+							 
+							 {% if  json_data.prog_lang == "ruby" %}
+							 <option  {% if  json_data.architecture == "ror" %} selected   {% endif %}  value="ror">Ruby on Rails</option>
+							 {% endif %}
 							 </select>
 						</div>
 						<div class="form-group">

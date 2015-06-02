@@ -55,7 +55,7 @@
                         </li>
                         <li><a href="#"><i class="fa fa-folder-open fa-fw"></i> Open Project</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-floppy-o fa-fw"></i> Save Project</a>
+                        <li><a href="#"  id="save_project_link"><i class="fa fa-floppy-o fa-fw"></i> Save Project</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -112,18 +112,40 @@
 	<script type="text/javascript">
 
 jQuery(document).ready(function(){
-	jQuery("#form_submit").on("click",function(e){
-		e.preventDefault();
+	
+	
+	
+	jQuery("#save_project_link").on("click",function(e){
+		//e.preventDefault();
 		 file_name = jQuery("#input_file_name").val();
 		 if(!file_name){
 			 jQuery("#modal_trigger_href").trigger("click")
 		 }
-		 else
+		 else{
 			 jQuery("form").submit();
-		
+		 }
 	})
 	
 })
+
+
+// FOR ARCHTECURE DYNAMIC SELECT
+
+	jQuery("#prog_lang").on("change",function(){
+		prog_lang = jQuery("#prog_lang").val();
+		
+	    
+	    if(prog_lang == 'php')
+	    	jQuery("#select_arch").find('option').remove().end().append('<option value="wordpress">Wordpress</option><option value="drupal">Drupal</option><option value="opencart">Opencart</option><option value="magento">Magento</option>');
+	    else if(prog_lang =='ruby'){
+	    console.log("rubty")	
+	    	jQuery("#select_arch").find('option').remove().end().append('<option value="ror">Ruby on Rails</option>');
+	    }
+	    else if(prog_lang =='python')
+	    	jQuery("#select_arch").find('option').remove().end().append('<option value="django">Django</option><option value="fullstack">Full Stack</option>');
+		
+	})
+
 
 </script>
 </body>
