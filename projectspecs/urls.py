@@ -20,4 +20,5 @@ urlpatterns = patterns('',
     url(r'^post-dev/',views.post_dev),
     url(r'^use-case/',views.use_case),
     url(r'^io-config/',views.io_config),
+    url(r'^new-project/',views.new_project),
 )

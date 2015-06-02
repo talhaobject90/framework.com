@@ -37,11 +37,38 @@
 
 
 <nav class="navbar navbar-default top_nav" role="navigation" >
-				<div class="navbar-header">
-					 <a class="navbar-brand" href="/">Framework.com</a>
-				</div>
+				
 				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+				
+				
+									<ul class="nav navbar-nav navbar-left">
+					
+					
+					
+					<li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-file fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="/projectspecs/new-project"><i class="fa fa-plus-square fa-fw"></i> New Project</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-folder-open fa-fw"></i> Open Project</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-floppy-o fa-fw"></i> Save Project</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+					</ul>
+					<div class="navbar-header">
+					 <a class="navbar-brand" href="/">Framework.com</a>
+				</div>
+					
+					
+					
+					
+					
 					<ul class="nav navbar-nav navbar-right">
 					
 					
@@ -76,8 +103,28 @@
 
 							{% block content %} {% endblock %}
 </div>
+
+
+
 	<script type="text/javascript" src="{% static 'js/jquery.min.js'%}"></script>
 	<script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
 	<script type="text/javascript" src="{% static 'js/scripts.js'%}"></script>
+	<script type="text/javascript">
+
+jQuery(document).ready(function(){
+	jQuery("#form_submit").on("click",function(e){
+		e.preventDefault();
+		 file_name = jQuery("#input_file_name").val();
+		 if(!file_name){
+			 jQuery("#modal_trigger_href").trigger("click")
+		 }
+		 else
+			 jQuery("form").submit();
+		
+	})
+	
+})
+
+</script>
 </body>
 </html>
