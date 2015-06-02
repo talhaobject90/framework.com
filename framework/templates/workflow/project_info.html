@@ -11,16 +11,16 @@
 			<!-- MAIN TABS -->
 				<ul class="nav nav-tabs">
 					<li class="active" >
-						<a href="/project-info/"  >Project Information</a>
+						<a href="/projectspecs/project-info/"  >Project Information</a>
 					</li>
 					<li  >
-						<a href="/introduction/">Requirements</a>
+						<a href="/projectspecs/introduction/">Requirements</a>
 					</li>
 					<li>
-						<a href="/use-case/" >Usecase Information</a>
+						<a href="/projectspecs/use-case/" >Usecase Information</a>
 					</li>
 					<li>
-						<a href="/io-config/" >Input & Output Configuration</a>
+						<a href="/projectspecs/io-config/" >Input & Output Configuration</a>
 					</li>
 					<li>
 						 <button type="button" class="btn btn-default">Generate</button>
@@ -32,53 +32,61 @@
 				<div class="tab-content">
 					<div class="tab-pane  active" id="panel_project_info">
 						<p>
+						
+						
+
 							<div class="col-md-12 column">
-					<form role="form" class="form-inline">
+					<form role="form" class="form-inline"  action="." method="POST">{% csrf_token %}
+					<input type="submit" class="form-control" >
 						<div class="form-group">
-							 <label for="input_project_info">Project Information</label><input type="text" class="form-control" id="input_project_info" />
+							 <label for="input_project_info">Project Information</label><input type="text" class="form-control"    value="{{json_data.project_info}}" name="project_info" id="input_project_info" />
 						</div>
 						<div class="form-group">
-							 <label for="input_project_code">Project Code</label><input type="text" class="form-control" id="input_project_code" />
+							 <label for="input_project_code">Project Code</label><input type="text" class="form-control"  value="{{json_data.project_code}}"  name="project_code" id="input_project_code" />
 						</div>
 						<div class="form-group">
 							 <label for="input_prog_lang">Programming Language</label>
-							 <select class="form-control" >
-							 <option>VB</option>
-							 <option>Django</option>
+							 <select class="form-control"  name="prog_lang" >
+							 <option    {% if  json_data.prog_lang == "php" %} selected   {% endif %} value="php" >PHP</option>
+							 <option   {% if  json_data.prog_lang == "python" %} selected   {% endif %} value="python">Python</option>
+							 <option   {% if  json_data.prog_lang == "ruby" %} selected   {% endif %} value="ruby">Ruby</option>	
 							 </select>
 						</div>
 						<div class="form-group">
 							 <label for="input_database">Database</label>
-							 <select class="form-control" >
-							 <option>VB</option>
-							 <option>Django</option>
+							 <select class="form-control"  name="database">
+							 <option  {% if  json_data.database == "sqllite" %} selected   {% endif %} value="sqllite">SQLite</option>
+							 <option {% if  json_data.database == "mysql" %} selected   {% endif %}  value="mysql">MYSQL</option>
+							 <option  {% if  json_data.database == "postgres" %} selected   {% endif %} value="postgres">POSTGRES</option>
+							 <option  {% if  json_data.database == "mongodb" %} selected   {% endif %} value="mongodb">MongoDB</option>
 							 </select>
 						</div>
 						<br>
 						<div class="form-group">
 							 <label for="input_process_model">Process model</label>
-							 <select class="form-control" >
-							 <option>VB</option>
-							 <option>Django</option>
+							 <select class="form-control" name="process_model" >
+							 <option    {% if  json_data.process_model == "waterfall" %} selected   {% endif %} value="waterfall">WaterFall Model</option>
+							 <option   {% if  json_data.process_model == "vmodel" %} selected   {% endif %} value="vmodel">V Model</option>
+							 <option    {% if  json_data.process_model == "spiralmodel" %} selected   {% endif %} value="spiralmodel">Spiral Model</option>
 							 </select>
 						</div>
 						<div class="form-group">
 							 <label for="input_architecture">Architecture</label>
-							 <select class="form-control" >
-							 <option>VB</option>
-							 <option>Django</option>
+							 <select class="form-control"  name="architecture">
+							 <option  {% if  json_data.architecture == "arch_1" %} selected   {% endif %}  value="arch_1">Arch 1</option>
+							 <option  {% if  json_data.architecture == "arch_2" %} selected   {% endif %}  value="arch_2">Arch 2</option>
 							 </select>
 						</div>
 						<div class="form-group">
-							 <label for="input_cust_name">Customer Name</label><input type="text" class="form-control" id="input_cust_name" />
+							 <label for="input_cust_name">Customer Name</label><input type="text" class="form-control" id="input_cust_name" value="{{json_data.cust_name}}"  name="cust_name" />
 						</div>
 						<div class="form-group">
-							 <label for="input_cust_code">Customer Code</label><input type="text" class="form-control" id="input_cust_code" />
+							 <label for="input_cust_code">Customer Code</label><input type="text" class="form-control" id="input_cust_code"    value="{{json_data.cust_code}}"  name="cust_code"/>
 						</div>
 						<br>
 						<div class="form-group">
 							 <label for="input_cust_addr">Customer Address</label>
-							 <textarea rows="10" cols="20" class="form-control" id="input_cust_addr" /></textarea>
+							 <textarea rows="10" cols="20" class="form-control" id="input_cust_addr" name="cust_addr"    />{{json_data.cust_addr}}</textarea>
 						</div>
 						
 					</form>
@@ -100,16 +108,8 @@
 				<!--  END OF REQUIREMENTS TAB -->
 						</p>
 					</div>
-					<div class="tab-pane " id="panel_usecase_info">
-						<p>
-							Howdy, I'm in Section 2.
-						</p>
-					</div>
-					<div class="tab-pane " id="panel_io_config">
-						<p>
-							Howdy, I'm in Section 2.
-						</p>
-					</div>
+	 
+ 
 				 
 				</div>
 				<!--  END OF MAIN TABS CONTENT -->
