@@ -71,7 +71,7 @@
 												<form " role="form" class="form-inline"  action="." method="POST">{% csrf_token %}
 		
 									<!-- - FORM MODAL -->
-					<div class="col-md-6 column">
+			 
 			 <a id="modal_trigger_href" style="display:none;" href="#modal-container-543351" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
 			
 			<div class="modal fade" id="modal-container-543351" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -98,87 +98,78 @@
 				
 			</div>
 			
-		</div>
+ 
 		
 		<!--  END OF  FORM MODAL -->
 							<div class="form-inline small_form-inline">
 							<div class="form-group">
-							 <label for="input_cust_name">Usecase Id</label><input type="text" class="form-control" id="input_cust_name" />
+							 <label for="input_usecase_id">Usecase Id</label><input type="text" class="form-control" id="input_usecase_id" name="usercase_id" value="{{json_data.usercase_id}}" />
 						</div>
 						<div class="form-group">
-							 <label for="input_cust_code">Usecase Name</label><input type="text" class="form-control" id="input_cust_code" />
+							 <label for="input_usecase_name">Usecase Name</label><input type="text" class="form-control" id="input_usecase_name" name="usecase_name"  value="{{json_data.usecase_name}}"/>
 						</div>
 						<div class="form-group">
-							 <label for="input_cust_code">Priority</label>
-							 <select class="form-control">
+							 <label for="input_usercase_code_priority">Priority</label>
+							 <select class="form-control" id="input_usercase_code_priority" name="usercase_code_priority" >
 							 <option>Top</option>
 							 <option>Normal</option>
 							 </select>
 						</div>
 						<div class="form-group">
-							 <label for="input_cust_code">Author</label><input type="text" class="form-control" id="input_cust_code" />
+							 <label for="input_usercase_author">Author</label><input type="text" class="form-control" id="input_usercase_author"  name="usercase_author" value="{{json_data.usercase_author}}"/>
 						</div>
 						<div class="form-group">
-							 <label for="input_cust_code">Date</label><input type="text" class="form-control" id="input_cust_code" />
+							 <label for="input_usecase_date">Date</label><input type="text" class="form-control" id="input_usecase_date" name="usecase_date"  value="{{json_data.usecase_date}}"/>
 						</div>
 						<div class="form-group">
-							 <label for="input_cust_code">Version</label><input type="text" class="form-control" id="input_cust_code" />
+							 <label for="input_usecase_version">Version</label><input type="text" class="form-control" id="input_usecase_version"  name="usecase_version" value="{{json_data.usecase_version}}"/>
 						</div>
 						</div>
 						<div class="col-md-4 column"  style="padding-left:0px;">
 						<div class="form-group">
-							 <label for="input_cust_code">Actions</label><input type="text" class="form-control" id="input_cust_code" />
+							 <label for="input_usecase_actions">Actions</label><input type="text" class="form-control" id="input_usecase_actions" name="usecase_actions"  value="{{json_data.usecase_actions}}"/>
 						</div>
 						<div class="form-group">
-							 <label for="input_cust_code">Frequency of use</label><input type="text" class="form-control" id="input_cust_code" />
+							 <label for="input_usecase_frequency">Frequency of use</label><input type="text" class="form-control" id="input_usecase_frequency"  name="usecase_frequency" value="{{json_data.usecase_frequency}}"/>
 						</div>
 						</div>
 						<div class="form-group col-md-8 column" >
-							 <label for="input_cust_code">Brief Description</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_cust_addr" >
-							 </textarea>
+							 <label for="input_usecase_breif_desc">Brief Description</label>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_breif_desc" name="usecase_breif_desc"  >{{json_data.usecase_breif_desc}}</textarea>
 						</div>
 				
 				
 						<div class="form-group col-md-6 column" >
-							 <label for="input_pre_cond">Pre Conditions</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_pre_cond" >
-							 </textarea>
+							 <label for="input_usecase_pre_cond">Pre Conditions</label>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_pre_cond"  name="usecase_pre_cond" >{{json_data.usecase_pre_cond}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
-							 <label for="input_post_cond">Post Conditions</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_post_cond" >
-							 </textarea>
+							 <label for="input_usecase_post_cond">Post Conditions</label>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_post_cond" name="usecase_post_cond">{{json_data.usecase_post_cond}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
-							 <label for="input_basic_flow">Basic Flow</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_basic_flow" >
-							 </textarea>
+							 <label for="input_usecase_basic_flow">Basic Flow</label>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_basic_flow" name="usecase_basic_flow" >{{json_data.usecase_basic_flow}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
-							 <label for="input_alt_flow">Alternative Flow</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_alt_flow" >
-							 </textarea>
+							 <label for="input_usecase_alt_flow">Alternative Flow</label>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_alt_flow"  name="usecase_alt_flow">{{json_data.usecase_alt_flow}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
-							 <label for="input_incl">Includes</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_incl" >
-							 </textarea>
+							 <label for="input_usecase_incl">Includes</label>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_incl"  name="usecase_incl">{{json_data.usecase_incl}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
-							 <label for="input_ext_point">Extenstion Point</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_ext_point" >
-							 </textarea>
+							 <label for="input_usecase_ext_point">Extenstion Point</label>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_ext_point" name="usecase_ext_point" >{{json_data.usecase_ext_point}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
-							 <label for="input_business_rules">Business Rules</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_business_rules" >
-							 </textarea>
+							 <label for="input_usecase_business_rules">Business Rules</label>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_business_rules" name="usecase_business_rules" >{{json_data.usecase_business_rules}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
-							 <label for="input_spl_req">Spl Requirements</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_spl_req" >
-							 </textarea>
+							 <label for="input_usecase_spl_req">Spl Requirements</label>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_spl_req" name="usecase_spl_req" >{{json_data.usecase_spl_req}}</textarea>
 						</div>
 						
 						

@@ -116,8 +116,11 @@ jQuery(document).ready(function(){
 	
 	
 	jQuery("#save_project_link").on("click",function(e){
-		//e.preventDefault();
+		e.preventDefault();
 		 file_name = jQuery("#input_file_name").val();
+		 
+		 
+		  
 		 if(!file_name){
 			 jQuery("#modal_trigger_href").trigger("click")
 		 }

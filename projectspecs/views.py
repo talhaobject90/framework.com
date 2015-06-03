@@ -8,12 +8,14 @@ from django.conf import settings
 import json
 import os
 from tinydb import TinyDB, where
+from forms import *
+
 
 tinydb_pathto_file = "{0}/db/tinydb.json"
 tinydb_path = tinydb_pathto_file.format(settings.PROJECT_ROOT)
 db = TinyDB(tinydb_path)
-########## CUSTOM DATA ###
-from forms import *
+
+
 
 
 
@@ -443,7 +445,7 @@ def environment(request):
             # opening existing session 
             if (request.session.get('project_code',None)  != 'New Project'):
                     project_code = request.session.get('project_code',None)
-                    el = db.get(where('project_code') == project_code)
+                    el = db.get(where('project_code') == project_code )
                     json_data = el
             #opening new session
             else:
@@ -558,10 +560,69 @@ def post_dev(request):
 
 
 def use_case(request):
-    return render(request, 'workflow/use_case.html')
+        if request.method == 'POST':
+        
+            # check cookie set
+            project_code = request.session.get('project_code',None)
+            
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"usercase_id": request.POST.get("usercase_id", "usercase_id"),
+                               "usecase_name": request.POST.get("usecase_name", "usecase_name"),
+                               "usercase_code_priority": request.POST.get("usercase_code_priority", "usercase_code_priority"),
+                               "usercase_author": request.POST.get("usercase_author", "usercase_author"),
+                               "usecase_date": request.POST.get("usecase_date", "usecase_date"),
+                               "usecase_version": request.POST.get("usecase_version", "usecase_version"),
+                               "usecase_actions": request.POST.get("usecase_actions", "usecase_actions"),
+                               "usecase_frequency": request.POST.get("usecase_frequency", "usecase_frequency"),
+                               "usecase_breif_desc": request.POST.get("usecase_breif_desc", "usecase_breif_desc"),
+                               "usecase_pre_cond": request.POST.get("usecase_pre_cond", "usecase_pre_cond"),
+                               "usecase_post_cond": request.POST.get("usecase_post_cond", "usecase_post_cond"),
+                               "usecase_basic_flow": request.POST.get("usecase_basic_flow", "usecase_basic_flow"),
+                               "usecase_alt_flow": request.POST.get("usecase_alt_flow", "usecase_alt_flow"),
+                               "usecase_incl": request.POST.get("usecase_incl", "usecase_incl"),
+                               "usecase_ext_point": request.POST.get("usecase_ext_point", "usecase_ext_point"),
+                               "usecase_business_rules": request.POST.get("usecase_business_rules", "usecase_business_rules"),
+                               "usecase_spl_req": request.POST.get("usecase_spl_req", "usecase_spl_req")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
+            
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
+            return render_to_response(
+            'workflow/use_case.html',
+            context_data,  
+            RequestContext(request)
+            )
+        else:
+            # opening existing session 
+            if (request.session.get('project_code',None)  != 'New Project'):
+                    project_code = request.session.get('project_code',None)
+                    el = db.get(where('project_code') == project_code)
+                    json_data = el
+            #opening new session
+            else:
+                json_data =""
+                
+            context_data = {'json_data':    json_data,
+                            'project_code':request.session.get('project_code', "New Project")} 
+            return render_to_response(
+            'workflow/use_case.html',
+            context_data,  
+            RequestContext(request)
+            )
 
-def use_case(request):
-    return render(request, 'workflow/use_case.html')
+
+ 
 
 def io_config  (request):
     if request.method == 'POST':
