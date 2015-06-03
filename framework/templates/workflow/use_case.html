@@ -64,8 +64,43 @@
 						</li>
 					</ul>
 				</div>
+				
+				
+				
 				<div class="col-md-10 column">
-							<form role="form" >
+												<form " role="form" class="form-inline"  action="." method="POST">{% csrf_token %}
+		
+									<!-- - FORM MODAL -->
+					<div class="col-md-6 column">
+			 <a id="modal_trigger_href" style="display:none;" href="#modal-container-543351" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+			
+			<div class="modal fade" id="modal-container-543351" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="width:250px">
+					<div class="modal-content">
+						<div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h4 class="modal-title" id="myModalLabel">
+								Modal title
+							</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+							 <label for="input_file_name">File name</label><input type="text" class="form-control"    value="{{json_data.file_name}}" name="file_name" id="input_file_name" />
+						</div>
+						</div>
+						<div class="modal-footer">
+							 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							  <input  id="submit_trigger_modal"   type="submit" class="btn btn-primary">
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<!--  END OF  FORM MODAL -->
 							<div class="form-inline small_form-inline">
 							<div class="form-group">
 							 <label for="input_cust_name">Usecase Id</label><input type="text" class="form-control" id="input_cust_name" />
@@ -145,13 +180,6 @@
 							  <textarea rows="5" cols="50%" class="form-control" id="input_spl_req" >
 							 </textarea>
 						</div>
-						
-				 
-				 
-				 
-				 
-				 
-						
 						
 						
 						</div>

@@ -190,28 +190,372 @@ def background(request):
         )
 
 def prod_info(request):
-    return render(request, 'workflow/prod_info.html')
+
+    
+    if request.method == 'POST':
+        
+            # check cookie set
+            project_code = request.session.get('project_code',None)
+            
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"prod_info": request.POST.get("prod_info", "prod_info"),
+                               "prod_viewpoints": request.POST.get("prod_viewpoints", "prod_viewpoints"),
+                               "major_prod_constraints": request.POST.get("major_prod_constraints", "major_prod_constraints")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
+            
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
+            return render_to_response(
+            'workflow/prod_info.html',
+            context_data,  
+            RequestContext(request)
+            )
+    else:
+        # opening existing session 
+        if (request.session.get('project_code',None)  != 'New Project'):
+                project_code = request.session.get('project_code',None)
+                el = db.get(where('project_code') == project_code)
+                json_data = el
+        #opening new session
+        else:
+            json_data =""
+            
+        context_data = {'json_data':    json_data,
+                        'project_code':request.session.get('project_code', "New Project")} 
+        return render_to_response(
+        'workflow/prod_info.html',
+        context_data,  
+        RequestContext(request)
+        )
+
 
 def features(request):
     return render(request, 'workflow/features.html')
 
 def non_func_1(request):
-    return render(request, 'workflow/non_func_1.html')
+
+
+    if request.method == 'POST':
+        
+            # check cookie set
+            project_code = request.session.get('project_code',None)
+            
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"system_req": request.POST.get("system_req", "system_req"),
+                               "tech_req": request.POST.get("tech_req", "tech_req"),
+                               "startup_req": request.POST.get("startup_req", "startup_req"),
+                               "shutdown_req": request.POST.get("shutdown_req", "shutdown_req"),
+                               "interface_req": request.POST.get("interface_req", "interface_req"),
+                               "prob_req": request.POST.get("prob_req", "prob_req"),
+                               "performance_req": request.POST.get("performance_req", "performance_req")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
+            
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
+            return render_to_response(
+            'workflow/non_func_1.html',
+            context_data,  
+            RequestContext(request)
+            )
+    else:
+        # opening existing session 
+        if (request.session.get('project_code',None)  != 'New Project'):
+                project_code = request.session.get('project_code',None)
+                el = db.get(where('project_code') == project_code)
+                json_data = el
+        #opening new session
+        else:
+            json_data =""
+            
+        context_data = {'json_data':    json_data,
+                        'project_code':request.session.get('project_code', "New Project")} 
+        return render_to_response(
+        'workflow/non_func_1.html',
+        context_data,  
+        RequestContext(request)
+        )
 
 def non_func_2(request):
-    return render(request, 'workflow/non_func_2.html')
+    
+        if request.method == 'POST':
+        
+            # check cookie set
+            project_code = request.session.get('project_code',None)
+            
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"reliability_req": request.POST.get("reliability_req", "reliability_req"),
+                               "supp_req": request.POST.get("supp_req", "supp_req"),
+                               "impl_req": request.POST.get("impl_req", "impl_req"),
+                               "op_env_req": request.POST.get("op_env_req", "op_env_req"),
+                               "usablity_req": request.POST.get("usablity_req", "usablity_req"),
+                               "sec_req": request.POST.get("sec_req", "sec_req"),
+                               "qual_req": request.POST.get("qual_req", "qual_req")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
+            
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
+            return render_to_response(
+            'workflow/non_func_2.html',
+            context_data,  
+            RequestContext(request)
+            )
+        else:
+            # opening existing session 
+            if (request.session.get('project_code',None)  != 'New Project'):
+                    project_code = request.session.get('project_code',None)
+                    el = db.get(where('project_code') == project_code)
+                    json_data = el
+            #opening new session
+            else:
+                json_data =""
+                
+            context_data = {'json_data':    json_data,
+                            'project_code':request.session.get('project_code', "New Project")} 
+            return render_to_response(
+            'workflow/non_func_2.html',
+            context_data,  
+            RequestContext(request)
+            )
+
 
 def non_func_3(request):
-    return render(request, 'workflow/non_func_3.html')
+
+    
+        if request.method == 'POST':
+        
+            # check cookie set
+            project_code = request.session.get('project_code',None)
+            
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"trace_req": request.POST.get("trace_req", "trace_req"),
+                               "config_req": request.POST.get("config_req", "config_req"),
+                               "err_handling_req": request.POST.get("err_handling_req", "err_handling_req"),
+                               "localization_req": request.POST.get("localization_req", "localization_req"),
+                               "online_help_req": request.POST.get("online_help_req", "online_help_req"),
+                               "reporting_req": request.POST.get("reporting_req", "reporting_req"),
+                               "assumptions": request.POST.get("assumptions", "assumptions")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
+            
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
+            return render_to_response(
+            'workflow/non_func_3.html',
+            context_data,  
+            RequestContext(request)
+            )
+        else:
+            # opening existing session 
+            if (request.session.get('project_code',None)  != 'New Project'):
+                    project_code = request.session.get('project_code',None)
+                    el = db.get(where('project_code') == project_code)
+                    json_data = el
+            #opening new session
+            else:
+                json_data =""
+                
+            context_data = {'json_data':    json_data,
+                            'project_code':request.session.get('project_code', "New Project")} 
+            return render_to_response(
+            'workflow/non_func_3.html',
+            context_data,  
+            RequestContext(request)
+            )
+
 
 def environment(request):
-    return render(request, 'workflow/environment.html')
+        if request.method == 'POST':
+        
+            # check cookie set
+            project_code = request.session.get('project_code',None)
+            
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"dev_hardware_req": request.POST.get("dev_hardware_req", "dev_hardware_req"),
+                               "dev_software_req": request.POST.get("dev_software_req", "dev_software_req"),
+                               "dev_deviations": request.POST.get("dev_deviations", "dev_deviations"),
+                               "target_hardware_req": request.POST.get("target_hardware_req", "target_hardware_req"),
+                               "target_software_req": request.POST.get("target_software_req", "target_software_req"),
+                               "target_deviations": request.POST.get("target_deviations", "target_deviations")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
+            
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
+            return render_to_response(
+            'workflow/environment.html',
+            context_data,  
+            RequestContext(request)
+            )
+        else:
+            # opening existing session 
+            if (request.session.get('project_code',None)  != 'New Project'):
+                    project_code = request.session.get('project_code',None)
+                    el = db.get(where('project_code') == project_code)
+                    json_data = el
+            #opening new session
+            else:
+                json_data =""
+                
+            context_data = {'json_data':    json_data,
+                            'project_code':request.session.get('project_code', "New Project")} 
+            return render_to_response(
+            'workflow/environment.html',
+            context_data,  
+            RequestContext(request)
+            )
+
 
 def add_dev_consideration(request):
-    return render(request, 'workflow/add_dev_consideration.html')
+
+        if request.method == 'POST':
+        
+            # check cookie set
+            project_code = request.session.get('project_code',None)
+            
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"cust_part_req": request.POST.get("cust_part_req", "cust_part_req"),
+                               "commn_req": request.POST.get("commn_req", "commn_req"),
+                               "infrastructure_req": request.POST.get("infrastructure_req", "infrastructure_req")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
+            
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
+            return render_to_response(
+            'workflow/add_dev_consideration.html',
+            context_data,  
+            RequestContext(request)
+            )
+        else:
+            # opening existing session 
+            if (request.session.get('project_code',None)  != 'New Project'):
+                    project_code = request.session.get('project_code',None)
+                    el = db.get(where('project_code') == project_code)
+                    json_data = el
+            #opening new session
+            else:
+                json_data =""
+                
+            context_data = {'json_data':    json_data,
+                            'project_code':request.session.get('project_code', "New Project")} 
+            return render_to_response(
+            'workflow/add_dev_consideration.html',
+            context_data,  
+            RequestContext(request)
+            )
+
 
 def post_dev(request):
-    return render(request, 'workflow/post_dev.html')
+
+        if request.method == 'POST':
+        
+            # check cookie set
+            project_code = request.session.get('project_code',None)
+            
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"tech_transfer_req": request.POST.get("tech_transfer_req", "tech_transfer_req"),
+                               "maintenance_req": request.POST.get("maintenance_req", "maintenance_req")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
+            
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
+            return render_to_response(
+            'workflow/post_dev.html',
+            context_data,  
+            RequestContext(request)
+            )
+        else:
+            # opening existing session 
+            if (request.session.get('project_code',None)  != 'New Project'):
+                    project_code = request.session.get('project_code',None)
+                    el = db.get(where('project_code') == project_code)
+                    json_data = el
+            #opening new session
+            else:
+                json_data =""
+                
+            context_data = {'json_data':    json_data,
+                            'project_code':request.session.get('project_code', "New Project")} 
+            return render_to_response(
+            'workflow/post_dev.html',
+            context_data,  
+            RequestContext(request)
+            )
+
 
 def use_case(request):
     return render(request, 'workflow/use_case.html')

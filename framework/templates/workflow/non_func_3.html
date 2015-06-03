@@ -29,62 +29,7 @@
 				
 				<!--  MAIN TABS CONTENT -->
 				<div class="tab-content">
-					<div class="tab-pane  " id="panel_project_info">
-						<p>
-							<div class="col-md-12 column">
-					<form role="form" class="form-inline">
-						<div class="form-group">
-							 <label for="input_project_info">Project Information</label><input type="text" class="form-control" id="input_project_info" />
-						</div>
-						<div class="form-group">
-							 <label for="input_project_code">Project Code</label><input type="text" class="form-control" id="input_project_code" />
-						</div>
-						<div class="form-group">
-							 <label for="input_prog_lang">Programming Language</label>
-							 <select class="form-control" >
-							 <option>VB</option>
-							 <option>Django</option>
-							 </select>
-						</div>
-						<div class="form-group">
-							 <label for="input_database">Database</label>
-							 <select class="form-control" >
-							 <option>VB</option>
-							 <option>Django</option>
-							 </select>
-						</div>
-						<br>
-						<div class="form-group">
-							 <label for="input_process_model">Process model</label>
-							 <select class="form-control" >
-							 <option>VB</option>
-							 <option>Django</option>
-							 </select>
-						</div>
-						<div class="form-group">
-							 <label for="input_architecture">Architecture</label>
-							 <select class="form-control" >
-							 <option>VB</option>
-							 <option>Django</option>
-							 </select>
-						</div>
-						<div class="form-group">
-							 <label for="input_cust_name">Customer Name</label><input type="text" class="form-control" id="input_cust_name" />
-						</div>
-						<div class="form-group">
-							 <label for="input_cust_code">Customer Code</label><input type="text" class="form-control" id="input_cust_code" />
-						</div>
-						<br>
-						<div class="form-group">
-							 <label for="input_cust_addr">Customer Address</label>
-							 <textarea rows="10" cols="20" class="form-control" id="input_cust_addr" />
-							 </textarea>
-						</div>
-						
-					</form>
-				</div>
-						</p>
-					</div>
+					 
 					
 					<div class="tab-pane active" id="panel_requirements">
 						<p>
@@ -134,30 +79,65 @@
 			</nav>
 		</div>
 		
+					<form " role="form" class="form-inline"  action="." method="POST">{% csrf_token %}
+		
+									<!-- - FORM MODAL -->
+					<div class="col-md-6 column">
+			 <a id="modal_trigger_href" style="display:none;" href="#modal-container-543351" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+			
+			<div class="modal fade" id="modal-container-543351" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="width:250px">
+					<div class="modal-content">
+						<div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h4 class="modal-title" id="myModalLabel">
+								Modal title
+							</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+							 <label for="input_file_name">File name</label><input type="text" class="form-control"    value="{{json_data.file_name}}" name="file_name" id="input_file_name" />
+						</div>
+						</div>
+						<div class="modal-footer">
+							 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							  <input  id="submit_trigger_modal"   type="submit" class="btn btn-primary">
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<!--  END OF  FORM MODAL -->
 		<div class="col-md-12 column">
 				
 			<label for="input_trace_req">Trace Requirements</label>
-			<textarea rows="3" cols="100%" class="form-control" id="input_reliability_req" ></textarea>
+			<textarea rows="3" cols="100%" class="form-control" id="input_trace_req"  name="trace_req">{{json_data.trace_req}}</textarea>
 			
 			<label for="input_config_req">Configuration Requirements</label>
-			<textarea rows="3" cols="100%" class="form-control" id="input_supp_req" ></textarea>
+			<textarea rows="3" cols="100%" class="form-control" id="input_config_req" name="config_req">{{json_data.config_req}}</textarea>
 			
 			<label for="input_err_handling_req">Error Handling Requirements</label>
-			<textarea rows="3" cols="100%" class="form-control" id="input_impl_req" ></textarea>
+			<textarea rows="3" cols="100%" class="form-control" id="input_err_handling_req" name="err_handling_req">{{json_data.err_handling_req}}</textarea>
 			
 			<label for="input_localization_req">Localization Requirements</label>
-			<textarea rows="3" cols="100%" class="form-control" id="input_localization_req" ></textarea>
+			<textarea rows="3" cols="100%" class="form-control" id="input_localization_req" name="localization_req">{{json_data.localization_req}}</textarea>
 			
 			<label for="input_online_help_req">Online Help Requirements</label>
-			<textarea rows="3" cols="100%" class="form-control" id="input_online_help_req" ></textarea>
+			<textarea rows="3" cols="100%" class="form-control" id="input_online_help_req" name="online_help_req">{{json_data.online_help_req}}</textarea>
 			
 			<label for="input_reporting_req">Reporting Requirements</label>
-			<textarea rows="3" cols="100%" class="form-control" id="input_reporting_req" ></textarea>
+			<textarea rows="3" cols="100%" class="form-control" id="input_reporting_req" name="reporting_req">{{json_data.reporting_req}}</textarea>
 			
 			<label for="input_assumptions">Assumptions</label>
-			<textarea rows="3" cols="100%" class="form-control" id="input_assumptions" ></textarea>
+			<textarea rows="3" cols="100%" class="form-control" id="input_assumptions" name="assumptions">{{json_data.assumptions}}</textarea>
 					
 		</div>
+		
+		</form>
 		
 		
  
