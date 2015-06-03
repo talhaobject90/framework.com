@@ -102,6 +102,7 @@
 						<div class="form-group">
 							 <label for="input_architecture">Architecture</label>
 							 <select class="form-control"  name="architecture" id="select_arch">
+							 {% if json_data.prog_lang%}
 							 {% if  json_data.prog_lang == "php" %}
 							 <option  {% if  json_data.architecture == "wordpress" %} selected   {% endif %}  value="wordpress">Wordpress</option>
 							 <option  {% if  json_data.architecture == "drupal" %} selected   {% endif %}  value="drupal">Drupal</option>
@@ -117,6 +118,13 @@
 							 {% if  json_data.prog_lang == "ruby" %}
 							 <option  {% if  json_data.architecture == "ror" %} selected   {% endif %}  value="ror">Ruby on Rails</option>
 							 {% endif %}
+							{% else %}
+							<option  {% if  json_data.architecture == "wordpress" %} selected   {% endif %}  value="wordpress">Wordpress</option>
+							 <option  {% if  json_data.architecture == "drupal" %} selected   {% endif %}  value="drupal">Drupal</option>
+							 <option  {% if  json_data.architecture == "opencart" %} selected   {% endif %}  value="opencart">Opencart</option>
+							 <option  {% if  json_data.architecture == "magento" %} selected   {% endif %}  value="magento">Magento</option>
+							
+							{% endif %}
 							 </select>
 						</div>
 						<div class="form-group">

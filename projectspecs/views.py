@@ -19,7 +19,7 @@ def project_info(request):
             new_project_file = request.POST.get("file_name", "newproject")
             path_to_file = "{0}/db/"+new_project_file+".json"
             path = path_to_file.format(settings.PROJECT_ROOT)
-            with open(path, "w") as out:
+            with open(path, "w+") as out:
                 out.write(data)
             request.session['file_name'] = new_project_file
             file_data = open(path)
@@ -57,6 +57,9 @@ def new_project(request):
         return HttpResponseRedirect("/projectspecs/project-info/")
     
 def introduction(request):
+    
+    
+    
     return render(request, 'workflow/introduction.html')
 
 def background(request):
