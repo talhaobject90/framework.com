@@ -34,6 +34,10 @@
 						<p>
 							<div class="col-md-12 column">
 					<form " role="form" class="form-inline"  action="." method="POST">{% csrf_token %}
+					
+					
+					
+ 
 					 
 					<!-- - FORM MODAL -->
 					<div class="col-md-6 column">
@@ -68,10 +72,10 @@
 		<!--  END OF  FORM MODAL -->
 					 <input type="submit" class="form-control"  id="form_submit"  style="visibility:hidden"> 
 						<div class="form-group">
-							 <label for="input_project_info">Project Information</label><input type="text" class="form-control"    value="{{json_data.project_info.project_info}}" name="project_info" id="input_project_info" />
+							 <label for="input_project_info">Project Information</label><input type="text" class="form-control"    value="{{json_data.project_info}}" name="project_info" id="input_project_info" />
 						</div>
 						<div class="form-group">
-							 <label for="input_project_code">Project Code</label><input type="text" class="form-control"  value="{{json_data.project_info.project_code}}"  name="project_code" id="input_project_code" />
+							 <label for="input_project_code">Project Code</label><input type="text" class="form-control"  value="{{json_data.project_code}}"  name="project_code" id="input_project_code" />
 						</div>
 						<div class="form-group">
 							 <label for="input_prog_lang">Programming Language</label>

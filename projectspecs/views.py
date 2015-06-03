@@ -9,6 +9,9 @@ import json
 import os
 from tinydb import TinyDB, where
 
+tinydb_pathto_file = "{0}/db/tinydb.json"
+tinydb_path = tinydb_pathto_file.format(settings.PROJECT_ROOT)
+db = TinyDB(tinydb_path)
 ########## CUSTOM DATA ###
 from forms import *
 
@@ -18,62 +21,53 @@ def project_info(request):
     
     
     if request.method == 'POST':
-        # if the data is saved after opening
-            data = json.dumps(request.POST)
-            new_project_file = request.POST.get("file_name", "newproject")
-            path_to_file = "{0}/db/"+new_project_file+".json"
-            path = path_to_file.format(settings.PROJECT_ROOT)
+        
+            # check cookie set
+            project_code = request.POST.get("project_code", "newproject")
             
-            tinydb_pathto_file = "{0}/db/tinydb.json"
-            tinydb_path = tinydb_pathto_file.format(settings.PROJECT_ROOT)
-            db = TinyDB(tinydb_path)
-            db.insert(request.POST)
-            #return HttpResponse(request.POST)
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"cust_code": request.POST.get("cust_code", "cust_code"), 
+                               "cust_addr": request.POST.get("cust_addr", "cust_addr"), 
+                               "project_info": request.POST.get("project_info", "project_info"),
+                               "database": request.POST.get("database", "database"),
+                               "file_name": request.POST.get("file_name", "file_name"),
+                               "cust_name": request.POST.get("cust_name", "cust_name"),
+                               "project_code": request.POST.get("project_code", "project_code"),
+                               "architecture": request.POST.get("architecture", "architecture"),
+                               "prog_lang": request.POST.get("prog_lang", "prog_lang"),
+                               "process_model": request.POST.get("process_model", "process_model")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
             
-            appen_data = {'project_info': request.POST}
-
- 
-                
-            '''                 
-            # read data from json file
-            with open(path) as f:
-                data = json.load(f)
-            data.update(appen_data)
-    
-            # write updated data to json file
-            with open(path, "w") as out:
-                out.write(json.dumps(data))
-            '''    
-                
-                
-            #with open(path, "w") as out:
-             #   out.write(data)
-                
-            request.session['file_name'] = new_project_file
-            #file_data = open(path)
-            #json_data = json.load(file_data)
-            json_data = ''
-            context_data = {'json_data': json_data}
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
             return render_to_response(
             'workflow/project_info.html',
             context_data,  
             RequestContext(request)
             )
     else:
-        #return HttpResponse (request.session.get('file_name',None))
         # opening existing session 
-        if request.session.get('file_name', None): # if file name not saved
-            path_to_file = "{0}/db/"+request.session['file_name']+".json"
-            path = path_to_file.format(settings.PROJECT_ROOT)
-            file_data = open(path)
-            with open(path) as f:
-                json_data = json.load(f)
-        else:  # if new project is opened
-            #del request.session['file_name']
-            path = "{0}/db/tmp.json".format(settings.PROJECT_ROOT)
-            json_data = ''
+        if (request.session.get('project_code',None)  != 'New Project'):
+                project_code = request.session.get('project_code',None)
+                el = db.get(where('project_code') == project_code)
+                json_data = el
+        #opening new session
+        else:
+            json_data =""
+            
         context_data = {'json_data':    json_data,
-                        'file_name':request.session.get('file_name', None)} 
+                        'project_code':request.session.get('project_code', "New Project")} 
         return render_to_response(
         'workflow/project_info.html',
         context_data,  
@@ -82,18 +76,118 @@ def project_info(request):
 
 
 def new_project(request):
-        if request.session.get('file_name', None) != None:
-            del request.session['file_name']
+        if request.session.get('project_code', None) != None:
+            del request.session['project_code']
         return HttpResponseRedirect("/projectspecs/project-info/")
     
 def introduction(request):
     
+    if request.method == 'POST':
+        
+            # check cookie set
+            project_code = request.session.get('project_code',None)
+            
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"purpose": request.POST.get("purpose", "purpose"),
+                               "scope": request.POST.get("scope", "scope"),
+                               "reference": request.POST.get("reference", "reference"),
+                               "standards": request.POST.get("standards", "standards")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
+            
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
+            return render_to_response(
+            'workflow/introduction.html',
+            context_data,  
+            RequestContext(request)
+            )
+    else:
+        # opening existing session 
+        if (request.session.get('project_code',None)  != 'New Project'):
+                project_code = request.session.get('project_code',None)
+                el = db.get(where('project_code') == project_code)
+                json_data = el
+        #opening new session
+        else:
+            json_data =""
+            
+        context_data = {'json_data':    json_data,
+                        'project_code':request.session.get('project_code', "New Project")} 
+        return render_to_response(
+        'workflow/introduction.html',
+        context_data,  
+        RequestContext(request)
+        )
     
     
-    return render(request, 'workflow/introduction.html')
+ 
 
 def background(request):
-    return render(request, 'workflow/background.html')
+
+    if request.method == 'POST':
+        
+            # check cookie set
+            project_code = request.session.get('project_code',None)
+            
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"the_problem_of": request.POST.get("the_problem_of", "the_problem_of"),
+                               "affects": request.POST.get("affects", "affects"),
+                               "the_impact_of_which": request.POST.get("the_impact_of_which", "the_impact_of_which"),
+                               "success_soln": request.POST.get("success_soln", "success_soln"),
+                               "input_for": request.POST.get("input_for", "input_for"),
+                               "input_who": request.POST.get("input_who", "input_who"),
+                               "prod_sys_name": request.POST.get("prod_sys_name", "prod_sys_name"),
+                               "input_that": request.POST.get("input_that", "input_that"),
+                               "input_unlike": request.POST.get("input_unlike", "input_unlike"),
+                               "our_product": request.POST.get("our_product", "our_product")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
+            
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
+            return render_to_response(
+            'workflow/background.html',
+            context_data,  
+            RequestContext(request)
+            )
+    else:
+        # opening existing session 
+        if (request.session.get('project_code',None)  != 'New Project'):
+                project_code = request.session.get('project_code',None)
+                el = db.get(where('project_code') == project_code)
+                json_data = el
+        #opening new session
+        else:
+            json_data =""
+            
+        context_data = {'json_data':    json_data,
+                        'project_code':request.session.get('project_code', "New Project")} 
+        return render_to_response(
+        'workflow/background.html',
+        context_data,  
+        RequestContext(request)
+        )
 
 def prod_info(request):
     return render(request, 'workflow/prod_info.html')
@@ -126,60 +220,47 @@ def use_case(request):
     return render(request, 'workflow/use_case.html')
 
 def io_config  (request):
-     if request.method == 'POST':
-        # if the data is saved after opening
+    if request.method == 'POST':
+        
+            # check cookie set
+            project_code = request.POST.get("project_code", "newproject")
             
-            new_project_file = request.POST.get("file_name", "newproject")
-            path_to_file = "{0}/db/"+new_project_file+".json"
-            path = path_to_file.format(settings.PROJECT_ROOT)
+            el = db.get(where('project_code') == project_code)
+            # if new data
+            if(el == None):
+                insert_data = request.POST
+                db.insert(insert_data)
+                request.session['project_code'] = project_code
+                el = db.get(where('project_code') == project_code)
+            # if update     
+            else:
+                project_code = request.session.get('project_code',None)
+                update_data = request.POST
+                update_data = {"cust_code": request.POST.get("cust_code", "cust_code")}
+                db.update(update_data, where('project_code') == project_code)
+                el = db.get(where('project_code') == project_code)
             
-            appen_data = {'io_config': request.POST}
-            
-            # read data from json file
-            with open(path) as f:
-                data = json.load(f)
-            data.update(appen_data)
-    
-            # write updated data to json file
-            with open(path, "w") as out:
-                out.write(json.dumps(data))
-                
-            
-            
-            #request.session['file_name'] = new_project_file
-            file_data = open(path)
-            json_data = json.load(file_data)
-            context_data = {'json_data': json_data}
+            context_data = {'json_data': el,
+                            'project_code':request.session.get('project_code', None)}
             return render_to_response(
             'workflow/io_config.html',
             context_data,  
             RequestContext(request)
             )
-     else:
-         
+    else:
         # opening existing session 
-        #return HttpResponse (request.session.get('file_name',None))
-        if request.session.get('file_name', None): # if file name not saved
-            path_to_file = "{0}/db/"+request.session['file_name']+".json"
-            path = path_to_file.format(settings.PROJECT_ROOT)
-            file_data = open(path)
-            with open(path) as f:
-                json_data = json.load(f)
-        else:  # if new project is opened
-            #del request.session['file_name']
-            path = "{0}/db/tmp.json".format(settings.PROJECT_ROOT)
-            json_data = ''
+        if (request.session.get('project_code',None)  != 'New Project'):
+                project_code = request.session.get('project_code',None)
+                el = db.get(where('project_code') == project_code)
+                json_data = el
+        #opening new session
+        else:
+            json_data =""
+            
         context_data = {'json_data':    json_data,
-                        'file_name':request.session.get('file_name', None)} 
+                        'project_code':request.session.get('project_code', "New Project")} 
         return render_to_response(
         'workflow/io_config.html',
         context_data,  
         RequestContext(request)
         )
-    
-     return render(request, 'workflow/io_config.html')
-
-
- 
-
-
