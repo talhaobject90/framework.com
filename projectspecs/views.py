@@ -7,23 +7,52 @@ from django.template import RequestContext
 from django.conf import settings
 import json
 import os
+from tinydb import TinyDB, where
+
 ########## CUSTOM DATA ###
 from forms import *
 
 
 
 def project_info(request):
+    
+    
     if request.method == 'POST':
         # if the data is saved after opening
             data = json.dumps(request.POST)
             new_project_file = request.POST.get("file_name", "newproject")
             path_to_file = "{0}/db/"+new_project_file+".json"
             path = path_to_file.format(settings.PROJECT_ROOT)
-            with open(path, "w+") as out:
-                out.write(data)
+            
+            tinydb_pathto_file = "{0}/db/tinydb.json"
+            tinydb_path = tinydb_pathto_file.format(settings.PROJECT_ROOT)
+            db = TinyDB(tinydb_path)
+            db.insert(request.POST)
+            #return HttpResponse(request.POST)
+            
+            appen_data = {'project_info': request.POST}
+
+ 
+                
+            '''                 
+            # read data from json file
+            with open(path) as f:
+                data = json.load(f)
+            data.update(appen_data)
+    
+            # write updated data to json file
+            with open(path, "w") as out:
+                out.write(json.dumps(data))
+            '''    
+                
+                
+            #with open(path, "w") as out:
+             #   out.write(data)
+                
             request.session['file_name'] = new_project_file
-            file_data = open(path)
-            json_data = json.load(file_data)
+            #file_data = open(path)
+            #json_data = json.load(file_data)
+            json_data = ''
             context_data = {'json_data': json_data}
             return render_to_response(
             'workflow/project_info.html',
@@ -31,6 +60,7 @@ def project_info(request):
             RequestContext(request)
             )
     else:
+        #return HttpResponse (request.session.get('file_name',None))
         # opening existing session 
         if request.session.get('file_name', None): # if file name not saved
             path_to_file = "{0}/db/"+request.session['file_name']+".json"
@@ -96,7 +126,59 @@ def use_case(request):
     return render(request, 'workflow/use_case.html')
 
 def io_config  (request):
-    return render(request, 'workflow/io_config.html')
+     if request.method == 'POST':
+        # if the data is saved after opening
+            
+            new_project_file = request.POST.get("file_name", "newproject")
+            path_to_file = "{0}/db/"+new_project_file+".json"
+            path = path_to_file.format(settings.PROJECT_ROOT)
+            
+            appen_data = {'io_config': request.POST}
+            
+            # read data from json file
+            with open(path) as f:
+                data = json.load(f)
+            data.update(appen_data)
+    
+            # write updated data to json file
+            with open(path, "w") as out:
+                out.write(json.dumps(data))
+                
+            
+            
+            #request.session['file_name'] = new_project_file
+            file_data = open(path)
+            json_data = json.load(file_data)
+            context_data = {'json_data': json_data}
+            return render_to_response(
+            'workflow/io_config.html',
+            context_data,  
+            RequestContext(request)
+            )
+     else:
+         
+        # opening existing session 
+        #return HttpResponse (request.session.get('file_name',None))
+        if request.session.get('file_name', None): # if file name not saved
+            path_to_file = "{0}/db/"+request.session['file_name']+".json"
+            path = path_to_file.format(settings.PROJECT_ROOT)
+            file_data = open(path)
+            with open(path) as f:
+                json_data = json.load(f)
+        else:  # if new project is opened
+            #del request.session['file_name']
+            path = "{0}/db/tmp.json".format(settings.PROJECT_ROOT)
+            json_data = ''
+        context_data = {'json_data':    json_data,
+                        'file_name':request.session.get('file_name', None)} 
+        return render_to_response(
+        'workflow/io_config.html',
+        context_data,  
+        RequestContext(request)
+        )
+    
+     return render(request, 'workflow/io_config.html')
+
 
  
 
