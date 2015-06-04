@@ -758,7 +758,7 @@ def post_dev(request):
             )
 
 
-def use_case(request):
+def use_case(request,uid = None):
         if request.method == 'POST':
         
             # check cookie set
@@ -775,10 +775,10 @@ def use_case(request):
             else:
                 eid = request.session.get('eid',len(db)+1)
                 update_data = request.POST
-                update_data = {"usecase":{"usercase_id": request.POST.get("usercase_id", "usercase_id"),
+                update_data = {"usecase":{"usercase_id": request.POST.get("usecase_id", "usecase_id"),
                                "usecase_name": request.POST.get("usecase_name", "usecase_name"),
-                               "usercase_code_priority": request.POST.get("usercase_code_priority", "usercase_code_priority"),
-                               "usercase_author": request.POST.get("usercase_author", "usercase_author"),
+                               "usercase_code_priority": request.POST.get("usecase_code_priority", "usecase_code_priority"),
+                               "usecase_author": request.POST.get("usecase_author", "usecase_author"),
                                "usecase_date": request.POST.get("usecase_date", "usecase_date"),
                                "usecase_version": request.POST.get("usecase_version", "usecase_version"),
                                "usecase_actions": request.POST.get("usecase_actions", "usecase_actions"),
@@ -814,6 +814,7 @@ def use_case(request):
             if (request.session.get('eid',None)  != None):
                     eid = request.session.get('eid',len(db)+1)
                     el = db.get(cond=None, eid =  int(eid))
+                    #return HttpResponse(el['usecase']['2']['usecase_id'])
                     
                     json_data = el
                     file_name = el['file_name']
@@ -831,7 +832,10 @@ def use_case(request):
       
             context_data = {'json_data':    json_data,
                             'file_name':file_name,
-                            'open_el_array':open_el_array} 
+                            'open_el_array':open_el_array,
+                            'uid': 2
+                            }
+             
             return render_to_response(
             'workflow/use_case.html',
             context_data,  

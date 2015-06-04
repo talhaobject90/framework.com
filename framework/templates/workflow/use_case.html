@@ -38,30 +38,7 @@
 		<div class="row clearfix">
 				<div class="col-md-2 column" style="border:2px solid grey">
 					<ul class="list-unstyled">
-						<li>
-							Lorem ipsum dolor sit amet
-						</li>
-						<li>
-							Consectetur adipiscing elit
-						</li>
-						<li>
-							Integer molestie lorem at massa
-						</li>
-						<li>
-							Facilisis in pretium nisl aliquet
-						</li>
-						<li>
-							Nulla volutpat aliquam velit
-						</li>
-						<li>
-							Faucibus porta lacus fringilla vel
-						</li>
-						<li>
-							Aenean sit amet erat nunc
-						</li>
-						<li>
-							Eget porttitor lorem
-						</li>
+ 
 					</ul>
 				</div>
 				
@@ -103,20 +80,20 @@
 		<!--  END OF  FORM MODAL -->
 							<div class="form-inline small_form-inline">
 							<div class="form-group">
-							 <label for="input_usecase_id">Usecase Id</label><input type="text" class="form-control" id="input_usecase_id" name="usercase_id" value="{{json_data.usecase.usercase_id}}" />
+							 <label for="input_usecase_id">Usecase Id</label><input type="text" class="form-control" id="input_usecase_id" name="usecase_id" value="{{json_data.usecase.{{uid}}.usecase_id}}" />
 						</div>
 						<div class="form-group">
 							 <label for="input_usecase_name">Usecase Name</label><input type="text" class="form-control" id="input_usecase_name" name="usecase_name"  value="{{json_data.usecase.usecase_name}}"/>
 						</div>
 						<div class="form-group">
-							 <label for="input_usercase_code_priority">Priority</label>
-							 <select class="form-control" id="input_usercase_code_priority" name="usercase_code_priority" >
+							 <label for="input_usecase_code_priority">Priority</label>
+							 <select class="form-control" id="input_usecase_code_priority" name="usecase_code_priority" >
 							 <option>Top</option>
 							 <option>Normal</option>
 							 </select>
 						</div>
 						<div class="form-group">
-							 <label for="input_usercase_author">Author</label><input type="text" class="form-control" id="input_usercase_author"  name="usercase_author" value="{{json_data.usercase_author}}"/>
+							 <label for="input_usecase_author">Author</label><input type="text" class="form-control" id="input_usecase_author"  name="usecase_author" value="{{json_data.usecase_author}}"/>
 						</div>
 						<div class="form-group">
 							 <label for="input_usecase_date">Date</label><input type="text" class="form-control" id="input_usecase_date" name="usecase_date"  value="{{json_data.usecase_date}}"/>
