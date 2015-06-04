@@ -775,7 +775,7 @@ def use_case(request):
             else:
                 eid = request.session.get('eid',len(db)+1)
                 update_data = request.POST
-                update_data = {"usercase_id": request.POST.get("usercase_id", "usercase_id"),
+                update_data = {"usecase":{"usercase_id": request.POST.get("usercase_id", "usercase_id"),
                                "usecase_name": request.POST.get("usecase_name", "usecase_name"),
                                "usercase_code_priority": request.POST.get("usercase_code_priority", "usercase_code_priority"),
                                "usercase_author": request.POST.get("usercase_author", "usercase_author"),
@@ -791,7 +791,7 @@ def use_case(request):
                                "usecase_incl": request.POST.get("usecase_incl", "usecase_incl"),
                                "usecase_ext_point": request.POST.get("usecase_ext_point", "usecase_ext_point"),
                                "usecase_business_rules": request.POST.get("usecase_business_rules", "usecase_business_rules"),
-                               "usecase_spl_req": request.POST.get("usecase_spl_req", "usecase_spl_req")}
+                               "usecase_spl_req": request.POST.get("usecase_spl_req", "usecase_spl_req")}}
                 db.update(update_data,eids = [eid])
                 el = db.get(None, eid)
             open_el = db.search(where('file_name'))
