@@ -53,7 +53,9 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="/projectspecs/new-project"><i class="fa fa-plus-square fa-fw"></i> New Project</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-folder-open fa-fw"></i> Open Project</a>
+                        <li>
+                        <!-- <a    href="#openfile_modal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
+                        <a  href="#openfile_modal"  data-toggle="modal" ><i class="fa fa-folder-open fa-fw"></i> Open Project</a>  
                         </li>
                         <li><a href="#"  id="save_project_link"><i class="fa fa-floppy-o fa-fw"></i> Save Project</a>
                         </li>
@@ -62,7 +64,7 @@
                 </li>
 					</ul>
 					<div class="navbar-header">
-					 <a class="navbar-brand" href="/">Framework.com    - {{project_code}}</a>
+					 <a class="navbar-brand" href="/">Framework.com    - {{file_name}}</a>
 				</div>
 					
 					
@@ -99,7 +101,65 @@
  
 
 
-
+					<!-- - FORM MODAL -->
+					<div class="col-md-6 column">
+			<div class="modal fade" id="openfile_modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="width:250px">
+					<div class="modal-content">
+						<div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h4 class="modal-title" id="myModalLabel">
+								Open Project
+							</h4>
+						</div>
+						<div class="modal-body">
+						
+						<div class="form-group">
+						<ul >
+						{% for mykey,myvalue in open_el_array.items %}
+						<li ><a href="/projectspecs/open-project/{{mykey}}" > {{myvalue}} </a> </li>
+						{% endfor%}
+						</ul>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--  END OF  FORM MODAL -->
+		
+		
+		
+							<!-- - FORM MODAL -->
+					<div class="col-md-6 column">
+				<a id="check_change_form_href" style="display:none;" href="#check_change_form" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+					
+			<div class="modal fade" id="check_change_form" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="width:250px">
+					<div class="modal-content">
+						<div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h4 class="modal-title" id="myModalLabel">
+								Save Project?
+							</h4>
+						</div>
+						<div class="modal-body">
+						
+						<div class="form-group">
+						The project is modified would you like to save it?
+						</div>
+							<div class="modal-footer">
+							 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							  <input  id="submit_trigger_modal"   type="submit" class="btn btn-primary">
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--  END OF  FORM MODAL -->
 
 							{% block content %} {% endblock %}
 </div>
@@ -148,6 +208,25 @@ jQuery(document).ready(function(){
 	    	jQuery("#select_arch").find('option').remove().end().append('<option value="django">Django</option><option value="fullstack">Full Stack</option>');
 		
 	})
+	
+	
+	
+	// to detech form change
+	jQuery("form :input").change(function() {
+		jQuery("form").data("changed",true);
+		console.log("changed")
+});
+function check_change(e,url){
+	console.log(url)
+	e.preventDefault
+if (jQuery("form").data("changed")) {
+	jQuery("#check_change_form_href").trigger("click")
+	console.log("cccccccccccccccccc")
+	}
+else{
+	window.location.replace(url)
+}
+}
 
 
 </script>

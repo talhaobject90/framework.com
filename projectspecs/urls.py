@@ -21,4 +21,5 @@ urlpatterns = patterns('',
     url(r'^use-case/',views.use_case),
     url(r'^io-config/',views.io_config),
     url(r'^new-project/',views.new_project),
+    url(r'^open-project/(?P<eid>\d+)/$',views.open_project),
 )
