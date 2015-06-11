@@ -15,18 +15,11 @@ tinydb_pathto_file = "{0}/db/tinydb.json"
 tinydb_path = tinydb_pathto_file.format(settings.PROJECT_ROOT)
 db = TinyDB(tinydb_path)
 
-
-
-
-
 def project_info(request):
     
-    
     if request.method == 'POST':
-        
             # check cookie set
             eid = request.session.get('eid',len(db)+1)
-            
             
             el = db.get(None,eid)
             # if new data
@@ -69,6 +62,7 @@ def project_info(request):
             )
     else:
         # opening existing session 
+        
         if (request.session.get('eid',None)  != None):
                 eid = request.session.get('eid',len(db)+1)
                 el = db.get(cond=None, eid =  int(eid))
@@ -104,7 +98,6 @@ def new_project(request):
 
 def open_project(request ,eid = None):
         
-        #return HttpResponse(eid)
         if request.session.get('eid', None) != None:
           del request.session['eid']
         
@@ -758,9 +751,9 @@ def post_dev(request):
             )
 
 
-def use_case(request,uid = None):
+def use_case(request,puid = None):
+    
         if request.method == 'POST':
-        
             # check cookie set
             eid = request.session.get('eid',len(db)+1)
             
@@ -811,29 +804,48 @@ def use_case(request,uid = None):
             )
         else:
             # opening existing session 
+            
+            #request.session['eid'] = 5
+            
+            #return HttpResponse(request.session.get('eid',None))
+            
             if (request.session.get('eid',None)  != None):
                     eid = request.session.get('eid',len(db)+1)
                     el = db.get(cond=None, eid =  int(eid))
-                    #return HttpResponse(el['usecase']['2']['usecase_id'])
+                    #return HttpResponse(el['usecase'])
                     
                     json_data = el
                     file_name = el['file_name']
+                    all_data = db.all()
+                    if (el['usecase']):
+                        usecase_data = el['usecase']
+                    else:
+                        usecase_data = ""
                     
             #opening new session
             else:
+                all_data = db.all()
                 json_data =""
-                file_name = ''
-                
+                file_name = ""
+                usecase_data = ""
+            
+            #for usecase_data in jason_data:
+            #return HttpResponse(json.dumps(json_data), content_type="application/json")
+          
+            #return HttpResponse(all_data)
+            
             open_el = db.search(where('file_name'))
             open_el_array = {}
             
             for open_el_mem in open_el:
                 open_el_array.update({open_el_mem.eid:open_el_mem['file_name']})
       
-            context_data = {'json_data':    json_data,
+            context_data = {
+                            'all_data': all_data,
+                            'json_data':json_data,
                             'file_name':file_name,
                             'open_el_array':open_el_array,
-                            'uid': 2
+                            'usecase_data': usecase_data # get usecase information
                             }
              
             return render_to_response(

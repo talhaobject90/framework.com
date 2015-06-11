@@ -37,17 +37,19 @@
 		<div class="col-md-12 column">
 		<div class="row clearfix">
 				<div class="col-md-2 column" style="border:2px solid grey">
-					<ul class="list-unstyled">
- 
-					</ul>
+					<ol class="">
+					{% for each_data in all_data %}
+						<li>
+							<a href="/projectspecs/open-project/{{ forloop.counter }}">{{ each_data.file_name  }} </a>
+						</li>
+					{% endfor %}
+					</ol>
 				</div>
 				
-				
-				
 				<div class="col-md-10 column">
-												<form " role="form" class="form-inline"  action="." method="POST">{% csrf_token %}
+			<form " role="form" class="form-inline"  action="." method="POST">{% csrf_token %}
 		
-									<!-- - FORM MODAL -->
+			<!-- - FORM MODAL -->
 			 
 			 <a id="modal_trigger_href" style="display:none;" href="#modal-container-543351" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
 			
@@ -74,84 +76,79 @@
 				</div>
 				
 			</div>
-			
- 
-		
 		<!--  END OF  FORM MODAL -->
 							<div class="form-inline small_form-inline">
 							<div class="form-group">
-							 <label for="input_usecase_id">Usecase Id</label><input type="text" class="form-control" id="input_usecase_id" name="usecase_id" value="{{json_data.usecase.{{uid}}.usecase_id}}" />
+							 <label for="input_usecase_id">Usecase Id</label><input type="text" class="form-control" id="input_usecase_id" name="usecase_id" value="{{usecase_data.usercase_id}}" />
 						</div>
 						<div class="form-group">
-							 <label for="input_usecase_name">Usecase Name</label><input type="text" class="form-control" id="input_usecase_name" name="usecase_name"  value="{{json_data.usecase.usecase_name}}"/>
+							 <label for="input_usecase_name">Usecase Name</label><input type="text" class="form-control" id="input_usecase_name" name="usecase_name"  value="{{usecase_data.usecase_name}}"/>
 						</div>
 						<div class="form-group">
 							 <label for="input_usecase_code_priority">Priority</label>
 							 <select class="form-control" id="input_usecase_code_priority" name="usecase_code_priority" >
-							 <option>Top</option>
-							 <option>Normal</option>
+							 <option {% if  usecase_data.usercase_code_priority == "Top" %} selected   {% endif %}  value="Top">Top</option>
+							 <option {% if  usecase_data.usercase_code_priority == "Normal" %} selected   {% endif %}  value="Normal">Normal</option>
 							 </select>
 						</div>
 						<div class="form-group">
-							 <label for="input_usecase_author">Author</label><input type="text" class="form-control" id="input_usecase_author"  name="usecase_author" value="{{json_data.usecase_author}}"/>
+							 <label for="input_usecase_author">Author</label><input type="text" class="form-control"  id="input_usecase_author"  name="usecase_author" value="{{usecase_data.usecase_author}}"/>
 						</div>
 						<div class="form-group">
-							 <label for="input_usecase_date">Date</label><input type="text" class="form-control" id="input_usecase_date" name="usecase_date"  value="{{json_data.usecase_date}}"/>
+							 <label for="input_usecase_date">Date</label><input type="text" class="form-control" id="input_usecase_date" name="usecase_date"  value="{{usecase_data.usecase_date}}"/>
 						</div>
 						<div class="form-group">
-							 <label for="input_usecase_version">Version</label><input type="text" class="form-control" id="input_usecase_version"  name="usecase_version" value="{{json_data.usecase_version}}"/>
+							 <label for="input_usecase_version">Version</label><input type="text" class="form-control" id="input_usecase_version"  name="usecase_version" value="{{usecase_data.usecase_version}}"/>
 						</div>
 						</div>
 						<div class="col-md-4 column"  style="padding-left:0px;">
 						<div class="form-group">
-							 <label for="input_usecase_actions">Actions</label><input type="text" class="form-control" id="input_usecase_actions" name="usecase_actions"  value="{{json_data.usecase_actions}}"/>
+							 <label for="input_usecase_actions">Actions</label><input type="text" class="form-control" id="input_usecase_actions" name="usecase_actions"  value="{{usecase_data.usecase_actions}}"/>
 						</div>
 						<div class="form-group">
-							 <label for="input_usecase_frequency">Frequency of use</label><input type="text" class="form-control" id="input_usecase_frequency"  name="usecase_frequency" value="{{json_data.usecase_frequency}}"/>
+							 <label for="input_usecase_frequency">Frequency of use</label><input type="text" class="form-control" id="input_usecase_frequency"  name="usecase_frequency" value="{{usecase_data.usecase_frequency}}"/>
 						</div>
 						</div>
 						<div class="form-group col-md-8 column" >
 							 <label for="input_usecase_breif_desc">Brief Description</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_breif_desc" name="usecase_breif_desc"  >{{json_data.usecase_breif_desc}}</textarea>
+							 <textarea rows="5" cols="50%" class="form-control" id="input_usecase_breif_desc" name="usecase_breif_desc"  >{{usecase_data.usecase_breif_desc}}</textarea>
 						</div>
 				
 				
 						<div class="form-group col-md-6 column" >
 							 <label for="input_usecase_pre_cond">Pre Conditions</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_pre_cond"  name="usecase_pre_cond" >{{json_data.usecase_pre_cond}}</textarea>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_pre_cond"  name="usecase_pre_cond" >{{usecase_data.usecase_pre_cond}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
 							 <label for="input_usecase_post_cond">Post Conditions</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_post_cond" name="usecase_post_cond">{{json_data.usecase_post_cond}}</textarea>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_post_cond" name="usecase_post_cond">{{usecase_data.usecase_post_cond}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
 							 <label for="input_usecase_basic_flow">Basic Flow</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_basic_flow" name="usecase_basic_flow" >{{json_data.usecase_basic_flow}}</textarea>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_basic_flow" name="usecase_basic_flow" >{{usecase_data.usecase_basic_flow}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
 							 <label for="input_usecase_alt_flow">Alternative Flow</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_alt_flow"  name="usecase_alt_flow">{{json_data.usecase_alt_flow}}</textarea>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_alt_flow"  name="usecase_alt_flow">{{usecase_data.usecase_alt_flow}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
 							 <label for="input_usecase_incl">Includes</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_incl"  name="usecase_incl">{{json_data.usecase_incl}}</textarea>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_incl"  name="usecase_incl">{{usecase_data.usecase_incl}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
 							 <label for="input_usecase_ext_point">Extenstion Point</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_ext_point" name="usecase_ext_point" >{{json_data.usecase_ext_point}}</textarea>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_ext_point" name="usecase_ext_point" >{{usecase_data.usecase_ext_point}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
 							 <label for="input_usecase_business_rules">Business Rules</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_business_rules" name="usecase_business_rules" >{{json_data.usecase_business_rules}}</textarea>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_business_rules" name="usecase_business_rules" >{{usecase_data.usecase_business_rules}}</textarea>
 						</div>
 						<div class="form-group col-md-6 column" >
 							 <label for="input_usecase_spl_req">Spl Requirements</label>
-							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_spl_req" name="usecase_spl_req" >{{json_data.usecase_spl_req}}</textarea>
+							  <textarea rows="5" cols="50%" class="form-control" id="input_usecase_spl_req" name="usecase_spl_req" >{{usecase_data.usecase_spl_req}}</textarea>
 						</div>
-						
-						
-						</form>
-						</div>
+				</form>
+		</div>
 						
 				</div>
 			</div>
